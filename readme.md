@@ -71,7 +71,7 @@ cargo run
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/shell-design.git
+git clone https://github.com/farhan7479/shell-design.git
 cd shell-design
 
 # Build the project
