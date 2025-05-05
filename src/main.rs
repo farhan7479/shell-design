@@ -1,6 +1,8 @@
 use command::Command;
 use errors::CrateResult;
 use colored::*;
+use crossterm::terminal::size;
+use std::env;
 use tokio::{
     io::{AsyncBufReadExt, AsyncWriteExt},
     task::JoinHandle,
@@ -10,6 +12,7 @@ use std::process::Command as ProcessCommand;
 mod command;
 mod errors;
 mod helpers;
+mod terminal;
 
 fn spawn_user_input_handler() -> JoinHandle<CrateResult<()>> {
     tokio::spawn(async {
@@ -298,10 +301,34 @@ async fn main() {
     // Enable colored output
     colored::control::set_override(true);
     
-    // Start the user input handler
-    let user_input_handler = spawn_user_input_handler().await;
+    // Check command-line arguments
+    let args: Vec<String> = env::args().collect();
+    
+    if args.len() > 1 && args[1] == "--shell-mode" {
+        // Running in shell mode (spawned by the terminal emulator)
+        // Start the user input handler directly
+        let user_input_handler = spawn_user_input_handler().await;
 
-    if let Ok(Err(e)) = user_input_handler {
-        eprintln!("{} {}", "Shell Error:".bright_red().bold(), e);
+        if let Ok(Err(e)) = user_input_handler {
+            eprintln!("{} {}", "Shell Error:".bright_red().bold(), e);
+        }
+    } else {
+        // Running as a terminal emulator
+        match run_terminal_emulator() {
+            Ok(_) => (),
+            Err(e) => eprintln!("{} {}", "Terminal Error:".bright_red().bold(), e),
+        }
     }
+}
+
+/// Run the program as a terminal emulator
+fn run_terminal_emulator() -> CrateResult<()> {
+    // Get terminal size
+    let (width, height) = size()?;
+    
+    // Create and run the terminal emulator
+    let mut term = terminal::Terminal::new(width, height)?;
+    term.run()?;
+    
+    Ok(())
 }

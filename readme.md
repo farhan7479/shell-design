@@ -1,96 +1,51 @@
-# Shell Basics by Farhan Shahid
+# MyTerm - Modern Terminal Emulator
 
-A colorful, feature-rich shell implementation in Rust with useful file system operations and a beautiful terminal interface.
-
-![Welcome Screen](assets/welcome_section.png)
+A custom terminal emulator built in Rust with a built-in shell implementation.
 
 ## Features
 
-### File Operations
-- `ls` - List files in current directory with color-coded types
-- `ls -l` - Detailed file listing with permissions, size, and timestamps
-- `pwd` - Print working directory
-- `cd <directory>` - Change directory
-- `touch <file>` - Create a new file or update timestamp
-- `rm <file>` - Remove a file
-- `cat <file>` - Display file contents with formatting
+- Custom shell implementation with common commands (ls, cd, cat, etc.)
+- Beautiful syntax highlighting and colorful output
+- Directory navigation with Git branch integration
+- File operations (copy, move, create, delete)
+- Modern UI with title bar and status bar
+- VT100/ANSI escape sequence support
 
-### Directory Operations
-- `mkdir <directory>` - Create a directory
-- `mkdir -p <directory>` - Create a directory and its parents
-- `rmdir <directory>` - Remove an empty directory
-- `rmdir -r <directory>` - Remove a directory and its contents
+## Installation
 
-### File Management
-- `cp <source> <dest>` - Copy a file
-- `cp -r <source> <dest>` - Copy directory recursively
-- `mv <source> <dest>` - Move/rename files or directories
-- `stat <file/dir>` - Display detailed file or directory information
-- `ln <target> <link_name>` - Create symbolic link
-
-### Search and Information
-- `find <dir> <pattern>` - Find files matching pattern
-- `grep <file> <pattern>` - Search for pattern in file
-- `echo <text>` - Print text to the terminal
-- `exit` - Exit the shell
-- `help` - Display help message with all available commands
-
-## User Experience
-- Colorful welcome banner with ASCII art
-- Git branch detection in prompt
-- Color-coded file listings by type
-- Human-readable file sizes
-- Detailed permissions display
-- Error messages in red
-- Success messages in green
-
-![Command Demonstrations](assets/demo-cmd.png)
-
-## Implementation Details
-- Written in Rust for performance and safety
-- Asynchronous I/O with Tokio
-- Error handling with anyhow
-- Colored output using the colored crate
-- File operations using Rust's std::fs
-
-## Dependencies
-- Tokio - Async runtime
-- Anyhow - Error handling
-- Chrono - Date and time handling
-- Colored - Terminal coloring
-- Filetime - File timestamp manipulation
-
-## Running the Shell
-
-To run the project, simply execute the following from the project directory:
-```bash
-cargo run
-```
-
-## Building from Source
+### From Homebrew
 
 ```bash
-# Clone the repository
-git clone https://github.com/farhan7479/shell-design.git
-cd shell-design
-
-# Build the project
-cargo build
-
-# Run the project
-cargo run
+brew tap yourname/myterm
+brew install myterm
 ```
 
-## Help Section
+### From Source
 
-The shell includes a comprehensive help system that displays all available commands organized by category:
+```bash
+git clone https://github.com/yourname/myterm.git
+cd myterm
+cargo install --path .
+```
 
-![Help Section](assets/help-section.png)
+## Usage
+
+Launch MyTerm from your applications folder or run `myterm` from the command line.
+
+### Keyboard Shortcuts
+
+- `Ctrl+Q`: Exit the terminal
+- `Ctrl+B`: Toggle status bar
+- `Ctrl+R`: Toggle raw mode (for debugging)
+
+## Development
+
+MyTerm is built with Rust and uses the following libraries:
+- `crossterm` for terminal manipulation
+- `portable-pty` for pseudo-terminal support
+- `vt100` for terminal emulation
+- `tokio` for async operations
 
 ## License
 
-MIT License © 2025 Farhan Shahid
-
-## Author
-
-Farhan Shahid
+MIT License
