@@ -3,6 +3,20 @@ name = "shell"
 version = "0.1.0"
 edition = "2021"
 
+# Add macOS bundle configuration
+[package.metadata.bundle]
+name = "MyTerm"
+identifier = "com.yourname.myterm"
+icon = ["assets/app_icon.png"]
+version = "0.1.0"
+copyright = "© Your Name 2025"
+category = "Developer Tool"
+short_description = "A modern terminal emulator"
+long_description = """
+MyTerm is a custom terminal emulator with a built-in shell implementation,
+featuring colorful output, directory navigation, and file operations.
+"""
+
 [dependencies]
 anyhow = "1.0.98"
 tokio = { version = "1.44.2", features = ["full"] }
@@ -10,7 +24,11 @@ chrono = "0.4"
 filetime = "0.2"
 colored = "3.0.0"
 # Terminal emulation dependencies
-crossterm = "0.26.1"     # Terminal manipulation library
-portable-pty = "0.8.1"   # Cross-platform PTY implementation
-vt100 = "0.15.2"         # VT100 terminal emulation
-dirs-next = "2.0.0"      # Cross-platform directory paths
+crossterm = "0.26.1"     
+portable-pty = "0.8.1"   
+vt100 = "0.15.2"        
+dirs-next = "2.0.0"
+
+# Add package for creating macOS app bundles
+[build-dependencies]
+cargo-bundle = "0.6.0"
